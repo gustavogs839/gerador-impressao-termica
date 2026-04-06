@@ -1,0 +1,389 @@
+:root {
+  --bg: #f3f3f3;
+  --panel: #ffffff;
+  --text: #111111;
+  --muted: #666666;
+  --border: #d4d4d4;
+  --paper-width: 80mm;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 20px;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.panel {
+  background: var(--panel);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+.controls h1 {
+  margin: 0 0 8px;
+  font-size: 1.5rem;
+}
+
+.helper-text {
+  margin: 0 0 18px;
+  color: var(--muted);
+}
+
+.field {
+  margin-bottom: 14px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font: inherit;
+  background: #ffffff;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  margin: 8px 0 16px;
+  position: sticky;
+  top: 10px;
+  z-index: 2;
+  background: var(--panel);
+  padding-bottom: 8px;
+}
+
+button {
+  border: 0;
+  border-radius: 10px;
+  padding: 11px 14px;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+button.primary {
+  background: #111111;
+  color: #ffffff;
+}
+
+button.secondary {
+  background: #efefef;
+  color: #111111;
+}
+
+.preview-toolbar {
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.preview-canvas {
+  min-height: calc(100vh - 140px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  border: 1px dashed #cfcfcf;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #f8f8f8, #ededed);
+  overflow: auto;
+}
+
+.ticket {
+  width: var(--paper-width);
+  background: #ffffff;
+  color: #000000;
+  padding: 8mm 4mm;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.ticket,
+.ticket * {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.separator {
+  margin: 3mm 0;
+  text-align: center;
+  font-family: "Courier New", monospace;
+  font-size: 12pt;
+  font-weight: 700;
+  letter-spacing: 1px;
+  opacity: 0.85;
+}
+
+.ticket-title {
+  margin: 0;
+  text-align: center;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 900;
+  line-height: 0.95;
+}
+
+.ticket-title.main {
+  font-size: 23pt;
+}
+
+.ticket-title.sub {
+  margin-top: 2mm;
+  font-size: 28pt;
+}
+
+.classic-header {
+  text-align: center;
+}
+
+.classic-chip {
+  display: inline-block;
+  margin-bottom: 3mm;
+  padding: 1.6mm 4.5mm;
+  border: 1px solid #111111;
+  border-radius: 999px;
+  background: #111111;
+  color: #ffffff;
+  font-size: 8pt;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+}
+
+.classic-subtitle {
+  display: inline-block;
+  margin-top: 2mm;
+  padding: 0 0 1mm;
+  border-bottom: 2px solid #111111;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 20pt;
+  font-weight: 900;
+}
+
+.classic-card {
+  margin-top: 4mm;
+}
+
+.classic-label {
+  margin-bottom: 2mm;
+  text-align: center;
+  font-size: 8.5pt;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  color: #444444;
+}
+
+.ticket-box {
+  margin: 0;
+  border: 1px solid #111111;
+  border-radius: 4mm;
+  padding: 12px 10px;
+  text-align: center;
+  font-size: 11pt;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.classic-box {
+  background: #fcfcfc;
+}
+
+.modern-divider {
+  width: 100%;
+  margin: 5mm 0 3mm;
+  border-top: 2px dashed #111111;
+  opacity: 0.8;
+}
+
+.ticket-footer {
+  margin-top: 2mm;
+  text-align: center;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 13pt;
+  font-weight: 700;
+}
+
+.cut-marks {
+  display: flex;
+  justify-content: space-between;
+  padding: 4mm 8mm 0;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.brand-mark {
+  width: 42mm;
+  margin: 0 auto 1.5mm;
+  padding: 2mm;
+  border: 1px solid #111111;
+  border-radius: 16px;
+  background: #111111;
+  color: #ffffff;
+  text-align: center;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.brand-mark .mini {
+  display: block;
+  margin-bottom: 1px;
+  font-size: 7pt;
+  letter-spacing: 0.8px;
+}
+
+.brand-mark strong {
+  font-size: 13pt;
+  font-style: italic;
+}
+
+.brand-name {
+  margin: 0 0 2mm;
+  text-align: center;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 13pt;
+  font-weight: 700;
+}
+
+.order-heading {
+  margin: 0 0 4mm;
+  text-align: center;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 24pt;
+  font-weight: 900;
+}
+
+.order-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 92%;
+  max-width: 66mm;
+  min-height: 34mm;
+  margin: 0.5mm auto 2mm;
+  padding: 0;
+  border: 0;
+  font-weight: 900;
+  letter-spacing: -1px;
+  line-height: 0.82;
+}
+
+.order-box.large {
+  font-size: 90pt;
+}
+
+.order-box.medium {
+  font-size: 78pt;
+}
+
+.order-box.compact {
+  font-size: 64pt;
+}
+
+.order-contact {
+  margin-top: 1mm;
+  text-align: center;
+  font-size: 11pt;
+  font-weight: 700;
+}
+
+.custom-body {
+  margin: 5mm 0 0;
+  font-size: 11pt;
+}
+
+.custom-body p {
+  margin: 0 0 6px;
+}
+
+.muted-note {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .app {
+    grid-template-columns: 1fr;
+  }
+
+  .preview-canvas {
+    min-height: auto;
+  }
+}
+
+@page {
+  size: 80mm auto;
+  margin: 3mm;
+}
+
+@media print {
+  body {
+    background: #ffffff;
+  }
+
+  .controls,
+  .preview-toolbar {
+    display: none !important;
+  }
+
+  .app {
+    display: block;
+    padding: 0;
+  }
+
+  .panel {
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  .preview-canvas {
+    min-height: auto;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  .ticket {
+    width: var(--paper-width);
+    margin: 0 auto;
+    border: 0;
+    box-shadow: none;
+  }
+}
