@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerador de Impressão Térmica - Elgin i9</title>
+    <link rel="stylesheet" href="styles.css?v=20260406-3" />
+  </head>
+  <body>
+    <main class="app">
+      <aside class="panel controls">
+        <h1>Gerador de Impressão Térmica</h1>
+        <p class="helper-text">
+          Monte etiquetas e cupons em HTML, CSS e JavaScript para impressão na
+          impressora térmica <strong>Elgin i9</strong>.
+        </p>
+
+        <div class="field">
+          <label for="template">Modelo</label>
+          <select id="template">
+            <option value="goiano">Empadão Goiano</option>
+            <option value="moda">Empadão Moda</option>
+            <option value="carneSol">Empadão Carne de Sol</option>
+            <option value="pedido">Pedido numerado</option>
+            <option value="divulgacao">Divulgação do estabelecimento</option>
+            <option value="branco">Modelo em branco personalizável</option>
+          </select>
+        </div>
+
+        <div class="grid">
+          <div class="field">
+            <label for="paperWidth">Largura da bobina</label>
+            <select id="paperWidth">
+              <option value="80">80 mm</option>
+              <option value="58">58 mm</option>
+            </select>
+          </div>
+
+          <div class="field" data-field="orderNumber">
+            <label for="orderNumber">Número do pedido</label>
+            <input id="orderNumber" type="text" value="36" />
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="printTicket" class="primary" type="button">
+            Imprimir
+          </button>
+          <button id="resetTemplate" class="secondary" type="button">
+            Restaurar modelo
+          </button>
+          <button id="downloadHtml" class="secondary" type="button">
+            Baixar HTML
+          </button>
+        </div>
+
+        <div class="field">
+          <label for="title">Título</label>
+          <input id="title" type="text" />
+        </div>
+
+        <div class="field">
+          <label for="subtitle">Subtítulo / segunda linha</label>
+          <input id="subtitle" type="text" />
+        </div>
+
+        <div class="field">
+          <label for="description">Descrição / conteúdo</label>
+          <textarea id="description" rows="5"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="footer">Rodapé</label>
+          <input id="footer" type="text" />
+        </div>
+
+        <div class="field" data-field="phone">
+          <label for="phone">Telefone / contato</label>
+          <input id="phone" type="text" />
+        </div>
+
+        <div class="field hidden" data-field="website">
+          <label for="website">Site / URL</label>
+          <input id="website" type="text" />
+        </div>
+
+        <p class="muted-note">
+          Os três primeiros modelos seguem o estilo dos exemplos enviados. O
+          quarto permite alterar o número do pedido, o quinto é para divulgação do estabelecimento, e o sexto fica livre para
+          personalização.
+        </p>
+      </aside>
+
+      <section class="panel preview-panel">
+        <div class="preview-toolbar">
+          <span>Pré-visualização pronta para impressão</span>
+        </div>
+
+        <div class="preview-canvas">
+          <article id="ticket" class="ticket"></article>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js?v=20260406-3"></script>
+  </body>
+</html>
