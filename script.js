@@ -59,6 +59,18 @@ const templates = {
     website: "",
     orderNumber: "1",
   },
+  corretor: {
+    type: "realtor",
+    title: "Gustavo",
+    subtitle: "Corretor de Imóveis",
+    description:
+      "Conheça o Icoon Home Resort no Jardim Europa!\nEscaneie o QR Code e fale comigo agora mesmo no WhatsApp.",
+    footer: "Aponte a câmera do celular para o QR Code",
+    phone: "62 994589523",
+    website:
+      "Olá! Escaneei o QR Code do panfleto e gostaria de receber mais informações sobre o Icoon Home Resort no Jardim Europa. Pode me enviar o book digital e a tabela de preços atualizada?",
+    orderNumber: "",
+  },
 };
 
 const els = {
@@ -77,6 +89,7 @@ const els = {
   ticket: document.getElementById("ticket"),
   phoneField: document.querySelector('[data-field="phone"]'),
   websiteField: document.querySelector('[data-field="website"]'),
+  websiteLabel: document.querySelector('label[for="website"]'),
   orderField: document.querySelector('[data-field="orderNumber"]'),
 };
 
@@ -96,10 +109,14 @@ function getCurrentTemplate() {
 
 function updateFieldVisibility(templateType) {
   const showOrderNumber = templateType === "order";
-  const showWebsite = templateType === "promo";
+  const showWebsite = templateType === "promo" || templateType === "realtor";
   els.orderField.classList.toggle("hidden", !showOrderNumber);
   els.phoneField.classList.toggle("hidden", templateType === "classic");
   els.websiteField.classList.toggle("hidden", !showWebsite);
+  els.websiteLabel.textContent =
+    templateType === "realtor"
+      ? "Mensagem do WhatsApp (usada no QR Code)"
+      : "Site / URL";
 }
 
 function applyTemplate(templateKey) {
@@ -184,6 +201,40 @@ function renderCustom(data) {
   `;
 }
 
+function buildWhatsappLink(phone, message) {
+  const digits = String(phone || "").replace(/\D/g, "");
+  if (!digits) {
+    return "";
+  }
+  const withCountryCode = digits.startsWith("55") ? digits : `55${digits}`;
+  const text = message ? `?text=${encodeURIComponent(message)}` : "";
+  return `https://wa.me/${withCountryCode}${text}`;
+}
+
+function renderRealtor(data) {
+  const whatsappLink = buildWhatsappLink(data.phone, data.website);
+  const qrImage = whatsappLink
+    ? `<div class="qr-card"><img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(
+        whatsappLink
+      )}&margin=0" alt="QR Code do WhatsApp"></div>`
+    : "";
+
+  return `
+    <div class="realtor-header">
+      ${data.title ? `<div class="realtor-name">${escapeHtml(data.title)}</div>` : ""}
+      ${data.subtitle ? `<div class="realtor-role">${escapeHtml(data.subtitle)}</div>` : ""}
+    </div>
+    <div class="promo-body">
+      <div class="promo-text">
+        ${data.description ? `<div class="ticket-box promo-description">${nl2br(data.description)}</div>` : ""}
+        ${data.phone ? `<div class="order-contact">WhatsApp: ${escapeHtml(data.phone)}</div>` : ""}
+      </div>
+      ${qrImage}
+    </div>
+    ${data.footer ? `<div class="ticket-footer">${escapeHtml(data.footer)}</div>` : ""}
+  `;
+}
+
 function renderPromo(data) {
   const qrImage = data.website
     ? `<div class="qr-card"><img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(
@@ -231,6 +282,8 @@ function renderTicket() {
     els.ticket.innerHTML = renderCustom(data);
   } else if (template.type === "promo") {
     els.ticket.innerHTML = renderPromo(data);
+  } else if (template.type === "realtor") {
+    els.ticket.innerHTML = renderRealtor(data);
   } else {
     els.ticket.innerHTML = renderClassic(data);
   }
@@ -260,6 +313,9 @@ function downloadCurrentHtml() {
     .ticket-box { margin: 0; border: 1px solid #111; border-radius: 4mm; padding: 12px 10px; text-align: center; font-size: 11pt; font-weight: 700; line-height: 1.4; }
     .classic-box { background: #fcfcfc; }
     .promo-header { margin-bottom: 2mm; }
+    .realtor-header { margin-bottom: 3mm; text-align: center; }
+    .realtor-name { font-family: Georgia, "Times New Roman", serif; font-size: 22pt; font-weight: 900; }
+    .realtor-role { margin-top: 1mm; font-size: 11pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: #444; }
     .promo-body { display: flex; flex-wrap: wrap; justify-content: center; gap: 4mm; align-items: flex-start; }
     .promo-text { min-width: 42mm; max-width: 56mm; }
     .qr-card { width: 42mm; padding: 3mm; border: 1px solid #111; border-radius: 8px; display: flex; justify-content: center; align-items: center; background: #fcfcfc; }

@@ -8,7 +8,9 @@ Projeto simples em **HTML + CSS + JavaScript** para montar e imprimir modelos pa
 2. `Empadão Moda`
 3. `Empadão Carne de Sol`
 4. `Pedido numerado` com número editável
-5. `Modelo em branco personalizável`
+5. `Divulgação do estabelecimento` com QR Code para site
+6. `Corretor Imobiliário` com QR Code que abre o WhatsApp com mensagem pronta
+7. `Modelo em branco personalizável`
 
 ## Como usar
 

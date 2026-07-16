@@ -210,6 +210,26 @@ button.secondary {
     margin-bottom: 2mm;
   }
 
+  .realtor-header {
+    margin-bottom: 3mm;
+    text-align: center;
+  }
+
+  .realtor-name {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 22pt;
+    font-weight: 900;
+  }
+
+  .realtor-role {
+    margin-top: 1mm;
+    font-size: 11pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #444444;
+  }
+
   .promo-body {
     display: flex;
     flex-wrap: wrap;
