@@ -63,8 +63,7 @@ const templates = {
     type: "realtor",
     title: "Gustavo",
     subtitle: "Corretor de Imóveis",
-    description:
-      "Conheça o Icoon Home Resort no Jardim Europa!\nEscaneie o QR Code e fale comigo agora mesmo no WhatsApp.",
+    description: "",
     footer: "Aponte a câmera do celular para o QR Code",
     phone: "62 994589523",
     website:
