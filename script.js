@@ -106,6 +106,19 @@ function getCurrentTemplate() {
   return templates[els.template.value];
 }
 
+const PRINTABLE_WIDTHS_MM = { 80: 72, 58: 48 };
+
+function getPrintableWidthMm() {
+  return PRINTABLE_WIDTHS_MM[els.paperWidth.value] || Number(els.paperWidth.value);
+}
+
+const pageSizeStyle = document.createElement("style");
+document.head.appendChild(pageSizeStyle);
+
+function updatePageSize() {
+  pageSizeStyle.textContent = `@page { size: ${getPrintableWidthMm()}mm auto; margin: 0; }`;
+}
+
 function updateFieldVisibility(templateType) {
   const showOrderNumber = templateType === "order";
   const showWebsite = templateType === "promo" || templateType === "realtor";
@@ -273,7 +286,8 @@ function renderTicket() {
     orderNumber: els.orderNumber.value,
   };
 
-  els.ticket.style.setProperty("--paper-width", `${els.paperWidth.value}mm`);
+  els.ticket.style.setProperty("--paper-width", `${getPrintableWidthMm()}mm`);
+  updatePageSize();
 
   if (template.type === "order") {
     els.ticket.innerHTML = renderOrder(data);
@@ -291,6 +305,7 @@ function renderTicket() {
 }
 
 function downloadCurrentHtml() {
+  const printableWidth = getPrintableWidthMm();
   const printableHtml = `<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -299,7 +314,7 @@ function downloadCurrentHtml() {
   <title>Impressão térmica</title>
   <style>
     body { margin: 0; background: #fff; }
-    .ticket { width: ${els.paperWidth.value}mm; margin: 0 auto; padding: 8mm 4mm; color: #000; font-family: Arial, sans-serif; }
+    .ticket { width: ${printableWidth}mm; margin: 0 auto; padding: 8mm 4mm; color: #000; font-family: Arial, sans-serif; }
     .separator { margin: 3mm 0; text-align: center; font-family: "Courier New", monospace; font-size: 12pt; font-weight: 700; letter-spacing: 1px; opacity: 0.85; }
     .ticket-title { margin: 0; text-align: center; font-family: Georgia, "Times New Roman", serif; font-weight: 900; line-height: 0.95; }
     .ticket-title.main { font-size: 23pt; }
@@ -316,11 +331,11 @@ function downloadCurrentHtml() {
     .realtor-name { font-family: Georgia, "Times New Roman", serif; font-size: 22pt; font-weight: 900; }
     .realtor-role { margin-top: 1mm; font-size: 11pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: #444; }
     .promo-body { display: flex; flex-wrap: wrap; justify-content: center; gap: 4mm; align-items: flex-start; }
-    .promo-text { min-width: 42mm; max-width: 56mm; }
-    .qr-card { width: 42mm; padding: 3mm; border: 1px solid #111; border-radius: 8px; display: flex; justify-content: center; align-items: center; background: #fcfcfc; }
+    .promo-text { min-width: 0; max-width: 100%; }
+    .qr-card { width: min(42mm, 100%); padding: 3mm; border: 1px solid #111; border-radius: 8px; display: flex; justify-content: center; align-items: center; background: #fcfcfc; }
     .qr-code { width: 100%; height: auto; display: block; }
     .ticket-footer, .order-contact, .brand-name, .order-heading { text-align: center; font-family: Georgia, "Times New Roman", serif; font-weight: 700; }
-    .brand-mark { width: 42mm; margin: 0 auto 4mm; padding: 2mm; border: 1px solid #111; border-radius: 16px; background: #111; color: #fff; text-align: center; font-family: Georgia, "Times New Roman", serif; }
+    .brand-mark { width: min(42mm, 100%); margin: 0 auto 4mm; padding: 2mm; border: 1px solid #111; border-radius: 16px; background: #111; color: #fff; text-align: center; font-family: Georgia, "Times New Roman", serif; }
     .brand-mark .mini { display: block; font-size: 7pt; letter-spacing: 0.8px; }
     .brand-mark strong { font-size: 13pt; font-style: italic; }
     .order-heading { margin: 0 0 3mm; font-size: 24pt; font-weight: 900; }
@@ -330,7 +345,7 @@ function downloadCurrentHtml() {
     .order-box.compact { font-size: 64pt; }
     .cut-marks { display: flex; justify-content: space-between; padding: 4mm 8mm 0; font-size: 16px; line-height: 1; }
     .custom-body p { margin: 0 0 6px; }
-    @page { size: ${els.paperWidth.value}mm auto; margin: 3mm; }
+    @page { size: ${printableWidth}mm auto; margin: 0; }
   </style>
 </head>
 <body>

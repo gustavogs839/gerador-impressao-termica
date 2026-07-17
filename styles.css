@@ -239,12 +239,12 @@ button.secondary {
   }
 
   .promo-text {
-    min-width: 42mm;
-    max-width: 56mm;
+    min-width: 0;
+    max-width: 100%;
   }
 
   .qr-card {
-    width: 42mm;
+    width: min(42mm, 100%);
     padding: 3mm;
     border: 1px solid #111111;
     border-radius: 8px;
@@ -291,7 +291,7 @@ button.secondary {
 }
 
 .brand-mark {
-  width: 42mm;
+  width: min(42mm, 100%);
   margin: 0 auto 1.5mm;
   padding: 2mm;
   border: 1px solid #111111;
@@ -393,8 +393,8 @@ button.secondary {
 }
 
 @page {
-  size: 80mm auto;
-  margin: 3mm;
+  size: 72mm auto;
+  margin: 0;
 }
 
 @media print {
